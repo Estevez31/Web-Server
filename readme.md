@@ -122,13 +122,11 @@ while True:
 ![](FOTO1.PNG)
 
 ## Curcuito
-![]()
+![](1.jpg)
 > Web
 
-![]()
-![]()
+![](2.jpg)
 > Encendido
 
-![]()
-![]()
+![](3.jpg)
 > Apagado
