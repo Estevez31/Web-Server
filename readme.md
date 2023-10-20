@@ -20,13 +20,11 @@ import network
 import socket
 from machine import Pin
 
-led = Pin(15, Pin.OUT)
+led = machine.Pin("LED", machine.Pin.OUT)
 ledState = 'LED State Unknown'
 
-button = Pin(16, Pin.IN, Pin.PULL_UP)
-
-ssid = ''
-password = ''
+ssid = 'OPPO A53'
+password = 'f082dd9d35a2'
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -39,14 +37,37 @@ html = """<!DOCTYPE html><html>
 .buttonGreen { background-color: #4CAF50; border: 2px solid #000000;; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; }
 .buttonRed { background-color: #D11D53; border: 2px solid #000000;; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; }
 text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}
-</style></head>
-<body><center><h1>Control Panel</h1></center><br><br>
-<form><center>
-<center> <button class="buttonGreen" name="led" value="on" type="submit">LED ON</button>
-<br><br>
-<center> <button class="buttonRed" name="led" value="off" type="submit">LED OFF</button>
-</form>
-<br><br>
+<title>Control Panel</title>
+    <style>
+        body {
+            font-family: Georgia, sans-serif;
+        }
+
+        h1 {
+            font-family: 'Lucida Sans', serif;
+            font-weight: bold;
+        }
+
+        .buttonGreen, .buttonRed {
+            font-family: Century Gothic, sans-serif;
+        }
+    </style>
+<body>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-T4Tu_BaA19pINcwEhSR4SghbAD-MBfDmig&usqp=CAU" width="200" height="200">
+    <center><h1>Lumos & Nox</h1></center><br><br>
+    <form>
+        <center>
+        <center> <button class="buttonGreen" name="led" value="on" type="submit">LED ON</button>
+        <br><br>
+        <center> <button class="buttonRed" name="led" value="off" type="submit">LED OFF</button>
+    </form>
+    <br><br>
+<style>
+    body {
+        background-image: url('https://img.freepik.com/foto-gratis/muro-hormigon-gris-claro_53876-89532.jpg');
+        background-size: cover; /* Para que la imagen cubra toda la ventana del navegador */
+    }
+</style>
 <br><br>
 <p>%s<p></body></html>
 """
@@ -100,15 +121,8 @@ while True:
         
         ledState = "LED is OFF" if led.value() == 0 else "LED is ON" # a compact if-else statement
         
-        if button.value() == 1: # button not pressed
-            print("button NOT pressed")
-            buttonState = "Button is NOT pressed"
-        else:
-            print("button pressed")
-            buttonState = "Button is pressed"
-        
         # Create and send response
-        stateis = ledState + " and " + buttonState
+        stateis = ledState
         response = html % stateis
         cl.send('HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n')
         cl.send(response)
@@ -117,6 +131,7 @@ while True:
     except OSError as e:
         cl.close()
         print('connection closed')
+
 ```
 ## Simulación del circuito
 ![](FOTO1.PNG)
