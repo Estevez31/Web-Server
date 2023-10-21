@@ -156,11 +156,13 @@ while True:
 ## ENCENDIDO
 ![](1.jpg)
 > Web
-![](4.jpeg)
+
+![](4.jpg)
 > Encendido
 
 ## Apagado
 ![](2.jpg)
 > Web
-![](5.jpeg)
+
+![](5.jpg)
 > Apagado
