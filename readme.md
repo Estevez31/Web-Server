@@ -148,14 +148,19 @@ while True:
 
 ```
 ## Simulación del circuito
-![](FOTO1.PNG)
+![](fot0.PNG)
 
 ## Curcuito
+![](3.jpg)
+
+## ENCENDIDO
 ![](1.jpg)
 > Web
-
-![](2.jpg)
+![](4.jpeg)
 > Encendido
 
-![](3.jpg)
+## Apagado
+![](2.jpg)
+> Web
+![](5.jpeg)
 > Apagado
