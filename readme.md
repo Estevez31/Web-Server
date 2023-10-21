@@ -19,12 +19,19 @@ import time
 import network
 import socket
 from machine import Pin
+import ssd1306
 
 led = machine.Pin("LED", machine.Pin.OUT)
 ledState = 'LED State Unknown'
 
 ssid = 'OPPO A53'
 password = 'f082dd9d35a2'
+
+# Configura los pines SDA y SCL para la comunicación I2C
+i2c = machine.I2C(0, sda=machine.Pin(8), scl=machine.Pin(9))
+
+# Configura el objeto SSD1306 para la pantalla OLED
+oled = ssd1306.SSD1306_I2C(128, 64, i2c)
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -88,7 +95,10 @@ else:
     print('Connected')
     status = wlan.ifconfig()
     print( 'ip = ' + status[0] )
-    
+    # Dibuja "Hola Mundo" en la pantalla
+    oled.text('ip = ' + status[0], 5, 0)
+    # Actualiza la pantalla para mostrar el texto
+    oled.show()     
     
 # Open socket
 addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
@@ -111,6 +121,10 @@ while True:
         
         print( 'led on = ' + str(led_on))
         print( 'led off = ' + str(led_off))
+        
+        # Limpia la pantalla
+        oled.fill(0)
+        oled.show()
         
         if led_on == 8:
             print("led on")
